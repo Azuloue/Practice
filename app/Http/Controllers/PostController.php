@@ -14,10 +14,13 @@ class PostController extends Controller
  //@param Post Poseモデル
  //@return array Postモデルリスト
 
-public function index(Post $post)//インポートしたPostをインスタンス化して$postとして使用。
-{
-    return view('posts.index')->with(['posts' => $post->get()]);
-    //blade内で使う変数'posts'と設定。'posts'の中身にgetを使いインスタンス化した$postを代入。
-    //$postの中身を戻り値にする。
-}
+
+    public function index(Post $post)//インポートしたPostをインスタンス化して$postとして使用。
+    {
+        //blade内で使う変数'posts'と設定。'posts'の中身にgetを使いインスタンス化した$postを代入。
+        //$postの中身を戻り値にする。
+        return view('posts.index')->with('posts',$post->getPaginateByLimit());
+        //①return view('posts.index')->with('post',$post->getPaginateByLimit());
+        //②return view('posts.index')->with('post',$post);
+    }
 }
