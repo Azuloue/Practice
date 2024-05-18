@@ -41,4 +41,16 @@ class PostController extends Controller
         return view('posts.create');
      
     }
+
+    public function store(Request $request, Post $post)
+    {
+       $input = $request['post'];
+       $post->title = $input["title"];
+       $post->body = $input["body"];
+       $post->save();
+       //47〜50行目$post->fill($input)->save();でも可
+       //$post->create($input)でも可
+       return redirect('/posts/' . $post->id);
+       //ルーティングの{id}部分は上記のように記載
+    }
 }
