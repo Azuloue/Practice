@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -42,15 +43,16 @@ class PostController extends Controller
      
     }
 
-    public function store(Request $request, Post $post)
-    {
-       $input = $request['post'];
-       $post->title = $input["title"];
-       $post->body = $input["body"];
-       $post->save();
-       //47〜50行目$post->fill($input)->save();でも可
-       //$post->create($input)でも可
-       return redirect('/posts/' . $post->id);
-       //ルーティングの{id}部分は上記のように記載
+    public function store(PostRequest $request, Post $post)
+    {   
+
+        $input = $request['post'];
+        $post->title = $input["title"];
+        $post->body = $input["body"];
+        $post->save();
+        //47〜50行目$post->fill($input)->save();でも可
+        //$post->create($input)でも可
+        return redirect('/posts/' . $post->id);
+        //ルーティングの{id}部分は上記のように記載
     }
 }
