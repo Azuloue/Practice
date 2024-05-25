@@ -45,14 +45,28 @@ class PostController extends Controller
 
     public function store(PostRequest $request, Post $post)
     {   
-
         $input = $request['post'];
         $post->title = $input["title"];
         $post->body = $input["body"];
         $post->save();
-        //47〜50行目$post->fill($input)->save();でも可
+        //48〜51行目$post->fill($input)->save();でも可
         //$post->create($input)でも可
         return redirect('/posts/' . $post->id);
         //ルーティングの{id}部分は上記のように記載
+    }
+    
+    public function edit(Post $post){
+        return view('posts.edit')->with(['post' => $post]);
+    }
+    
+    public function update(PostRequest $request, Post $post)
+    {
+        $input_post = $request['post'];
+        $post->title = $input_post["title"];
+        $post->body = $input_post["body"];
+        $post->save();
+        
+        return redirect ('/posts/' . $post->id);
+        
     }
 }
