@@ -17,9 +17,10 @@
                 <p>{{ $post->body }}</p>    
             </div>
         </div>
-        <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
+        <button onclick="location.href='/posts/{{ $post->id }}/edit'">edit</button><br>
+        
         <div class="footer">
-            <a href="/">Pagetop</a>
+             <button onclick="location.href='/'">Pagetop</button><br>
         </div>
     </body>
 </html>
